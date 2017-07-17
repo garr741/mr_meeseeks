@@ -1,0 +1,8 @@
+requests
+pyyaml
+websocket-client
+slackclient
+wolframalpha
+pyfiglet
+bs4
+python-dateutil

@@ -1,0 +1,7 @@
+requests
+pyyaml
+websocket-client
+slackclient
+pyrebase
+rtmbot
+
