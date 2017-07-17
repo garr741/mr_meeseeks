@@ -10,7 +10,7 @@ Installation
         pip install rtmbot
         pip install -r requirements.txt
 
-3. Get the rtmbot.conf and slack token file from Me
+3. Get the ```rtmbot.conf``` , ```secrets.py``` and slack token from TG
 4. Change to the rtmbot/ directory and run the 'rtmbot' command to start the bot
 5. Please do not test in the public channel. Use #testing-grounds or the Mr Meeseeks DM.
 
