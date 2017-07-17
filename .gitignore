@@ -5,6 +5,7 @@
 secrets.py
 rtmbot.conf
 .github/
+.vscode/
 
 ### macOS ###
 *.DS_Store
