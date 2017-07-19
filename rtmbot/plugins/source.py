@@ -5,23 +5,18 @@ import json
 import re
 import requests
 
-class Request(Plugin):
+class Source(Plugin):
   
     def process_message(self, msg):
       text = msg.get("text", "")
       channel = msg.get("channel", "");
-      user = msg.get("user", "")
-      match = re.findall(r"!request( .*)?", text)
+      match = re.findall(r"!source( .*)?", text)
       if not match:
         return
-      message = "Ooohhh can do."
-      return self.requestIt(channel, userName, match[0])
+      message = "https://github.com/garr741/mr_meeseeks\n"
+      message = message + "https://github.com/garr741/meeseeks-cloud-functions\n"
+      return self.output(channel, message)
 
     def output(self, channel, message):
       self.outputs.append([channel, message])
       return
-
-    def requestIt(self, channel, userName, request):
-      
-      self.output(channel, message)
-      
