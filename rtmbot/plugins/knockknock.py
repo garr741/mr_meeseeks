@@ -25,6 +25,7 @@ class KnockKnock(Plugin):
       query = text.split(" ", 1)
       eventName = query[1]
       #users = self.getUsers()
+      #self.distribute(users, eventName)
       self.distribute(channel, eventName)
       self.output(channel, "Done!")
 
@@ -43,7 +44,7 @@ class KnockKnock(Plugin):
           userList.append(dmInfo)
         except Exception as e:
           pass
-      #return userList
+      return userList
 
     def sendMessage(self, channel, eventName):
       message = "Hi, the " + eventName + " is coming up soon!"
