@@ -23,12 +23,12 @@ class KnockKnock(Plugin):
         return
       query = text.split(" ", 1)
       eventName = query[1]
-      users = self.getUsers()
       if self.getPermission() is True:
+        users = self.getUsers()
         self.distribute(users, eventName)
-        self.output(channel, "Done!")
       else:
-        self.output(channel, "Denied")
+        self.output(channel, "Who's there?")
+        return
 
     def distribute(self, users, eventName):
       for n in users:
