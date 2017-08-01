@@ -16,10 +16,8 @@ class Vote(Plugin):
     def process_message(self, msg):
       text = msg.get("text", "")
       channel = msg.get("channel", "");
-      match = re.findall(r"!vote (help|start|stop|unexcused|excused)( .*)?", text)
+      match = re.findall(r"!vote (help|start|stop|unexcused|excused|info)( .*)?", text)
       if not match:
-        return
-      if self.getPermission() is not True:
         return
       query = text.split(" ", 1)
       eventName = query[1]
@@ -29,7 +27,7 @@ class Vote(Plugin):
 
     def getPermission(self):
       db = fire.database()
-      results = db.child('config/vote').get()
+      results = db.child('vote/enabled').get()
       return results.val()
 
     def output(self, channel, message):

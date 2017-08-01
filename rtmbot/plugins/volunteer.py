@@ -5,19 +5,17 @@ import json
 import re
 import requests
 
-class Jira(Plugin):
+class Volunteer(Plugin):
   
     def process_message(self, msg):
       text = msg.get("text", "")
       channel = msg.get("channel", "");
-      match = re.findall(r"(?i)nm-[0-9]{0,4}", text)
+      match = re.findall(r"!volunteer( .*)?", text)
       if not match:
         return
-      return self.convert(channel, match[0])
+      link = "https://docs.google.com/forms/d/1CH0SVo7k38lGjBR-_YTHEv7uDWse9_27DKMV60GK9B4/viewform?edit_requested=true"
+      return self.output(channel, link)
 
     def output(self, channel, message):
       self.outputs.append([channel, message])
-
-    def convert(self, channel, query):
-      message = "https://angieslist.atlassian.net/browse/" + query
-      self.output(channel, message)
+      return
