@@ -19,7 +19,7 @@ class TGActivate(Plugin):
       match = re.findall(r"!init( .*)?", text)
       if not match:
         return
-      return 
+      return self.createConfig()
 
     def output(self, channel, message):
       self.outputs.append([channel, message])
@@ -41,3 +41,7 @@ class TGActivate(Plugin):
         if results["ok"] is True:
           db.child("users").child(username).update({"dmIM": results["channel"]["id"]})
       return self.output(channel, "Ooohhh can do.")
+
+    def createConfig(self):
+      db = fire.database()
+      db.child("config").set({'knock': False})
