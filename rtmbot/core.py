@@ -14,9 +14,9 @@ sys.dont_write_bytecode = True
 class RtmBot(object):
     def __init__(self, config):
         self.config = config
-        self.token = config.get('SLACK_TOKEN', None)
+        self.token = os.environ.get('MEESEEKS_API_KEY')
         if not self.token:
-            raise ValueError("Please add a SLACK_TOKEN to your config file.")
+            raise ValueError("Please add a SLACK_TOKEN to environment variables.")
 
         # get list of directories to search for loading plugins
         self.active_plugins = config.get('ACTIVE_PLUGINS', [])

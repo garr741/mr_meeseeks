@@ -7,17 +7,16 @@ Installation
 1. Clone the repo
 2. Install rtmbot (ideally into a [virtualenv](https://virtualenv.readthedocs.io/en/latest/))
 
-        pip install rtmbot
         pip install -r requirements.txt
 
-3. Get the ```rtmbot.conf``` , ```secrets.py``` and slack token from TG
-4. Change to the rtmbot/ directory and run the 'rtmbot' command to start the bot
+3. Get the ```secrets.py``` and slack token from TG
+4. Change to the rtmbot/ directory and run 'run.py' to start the bot
 5. Please do not test in the public channel. Use #testing-grounds or the Mr Meeseeks DM.
 
 Add Plugins/Commands
 -------
 
-To add a plugin, copy the ```template.py``` file in the ```plugins/``` directory to a new file. Add that new plugin to the ```rtmbot.conf``` file.
+To add a plugin, copy the ```template.py``` file in the ```plugins/``` directory to a new file. Add that new plugin to the ```rtmbot.conf``` file. Remember to change the name of the class from `Template` to whatever you plugin is called
 
 ##### RTM Output
 Plugins can send messages back to any channel or direct message. This is done by appending a two item array to the Plugin's output array (```myPluginInstance.output```). The first item in the array is the channel or DM ID and the second is the message text. Example that writes "hello world" when the plugin is started:
