@@ -7,6 +7,7 @@ import requests
 import pyrebase
 from secrets import secrets
 import datetime
+import pytz
 
 firebaseConfig = secrets["firebase"]
 
@@ -18,9 +19,11 @@ class Logger(Plugin):
       db = fire.database()
       presence = data.get("presence", "")
       if presence == "active" and self.getPermission() is True:
+        utc_now = pytz.utc.localize(datetime.datetime.utcnow())
+        d = utc_now.astimezone(pytz.timezone("America/Indianapolis"))
         obj = {
-          'day': datetime.datetime.now().isoweekday(),
-          'hour': datetime.datetime.now().hour
+          'day': d.isoweekday(),
+          'hour': d.hour
         }
         db.child("data/presence").push(obj)
   
