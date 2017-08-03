@@ -11,26 +11,9 @@ from rtmbot.utils.module_loading import import_string
 
 sys.dont_write_bytecode = True
 
-
-
-
 class RtmBot(object):
     def __init__(self, config):
-        '''
-            Params:
-                - config (dict):
-                    - SLACK_TOKEN: your authentication token from Slack
-                    - BASE_PATH (optional: defaults to execution directory) RtmBot will
-                        look in this directory for plugins.
-                    - LOGFILE (optional: defaults to rtmbot.log) The filename for logs, will
-                        be stored inside the BASE_PATH directory
-                    - DEBUG (optional: defaults to False) with debug enabled, RtmBot will
-                        break on errors
-        '''
-        # set the config object
         self.config = config
-
-        # set slack token
         self.token = config.get('SLACK_TOKEN', None)
         if not self.token:
             raise ValueError("Please add a SLACK_TOKEN to your config file.")
@@ -110,7 +93,6 @@ class RtmBot(object):
     def input(self, data):
         if "type" in data:
             function_name = "process_" + data["type"]
-            self._dbg("got {}".format(function_name))
             for plugin in self.bot_plugins:
                 plugin.do(function_name, data)
 
