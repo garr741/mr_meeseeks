@@ -8,7 +8,12 @@ import re
 import requests
 import dateutil.parser
 import calendar
+import pyrebase
 from secrets import secrets
+
+firebaseConfig = secrets["firebase"]
+
+fire = pyrebase.initialize_app(firebaseConfig)
 
 calendarId = secrets["google"]["calendarId"]
 apiKey = secrets["google"]["apiKey"]
@@ -20,6 +25,8 @@ class CalendarBot(Plugin):
       channel = msg.get("channel", "");
       match = re.findall(r"!calendar( .*)?", text)
       if not match:
+        return
+      if self.getPermission() is False:
         return
       nextEvents = self.getEvents(channel)
       self.sortEvents(channel, nextEvents)
@@ -85,4 +92,9 @@ class CalendarBot(Plugin):
       year = date.year
       results = str(weekday) + ", " + str(month) + " " + str(day) + ", " + str(year)
       return results
+
+    def getPermission(self):
+      db = fire.database()
+      results = db.child('config/calendar').get()
+      return results.val()
         

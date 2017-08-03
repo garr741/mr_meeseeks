@@ -6,12 +6,23 @@ import re
 import requests
 import pyrebase
 from secrets import secrets
+import datetime
 
 firebaseConfig = secrets["firebase"]
 
 fire = pyrebase.initialize_app(firebaseConfig)
 
 class Logger(Plugin):
+  
+    def process_presence_change(self, data):
+      db = fire.database()
+      presence = data.get("presence", "")
+      if presence == "active" and self.getPermission() is True:
+        obj = {
+          'day': datetime.datetime.now().isoweekday(),
+          'hour': datetime.datetime.now().hour
+        }
+        db.child("data/presence").push(obj)
   
     def process_message(self, msg):
       text = msg.get("text", "")
@@ -31,3 +42,7 @@ class Logger(Plugin):
         db = fire.database()
         db.child("Messages").child(channelName).push({'user': userName, 'text': text, 'ts': ts})
       
+    def getPermission(self):
+      db = fire.database()
+      results = db.child('config/presence').get()
+      return results.val()

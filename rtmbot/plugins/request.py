@@ -4,6 +4,12 @@ from rtmbot.core import Plugin
 import json
 import re
 import requests
+import pyrebase
+from secrets import secrets
+
+firebaseConfig = secrets["firebase"]
+
+fire = pyrebase.initialize_app(firebaseConfig)
 
 class Request(Plugin):
   
@@ -14,14 +20,17 @@ class Request(Plugin):
       match = re.findall(r"!request( .*)?", text)
       if not match:
         return
+      if self.getPermission() is False:
+        return
       message = "Ooohhh can do."
-      return self.requestIt(channel, userName, match[0])
+      return self.output(channel, message)
 
     def output(self, channel, message):
       self.outputs.append([channel, message])
       return
 
-    def requestIt(self, channel, userName, request):
-      
-      self.output(channel, message)
+    def getPermission(self):
+      db = fire.database()
+      results = db.child('config/request').get()
+      return results.val()
       

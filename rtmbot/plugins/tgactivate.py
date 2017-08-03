@@ -44,4 +44,4 @@ class TGActivate(Plugin):
 
     def createSomething(self):
       db = fire.database()
-      db.child("vote").set({'enabled': False})
+      db.child("data/presence").set({'enabled': False})

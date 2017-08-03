@@ -21,8 +21,6 @@ class Vote(Plugin):
         return
       query = text.split(" ", 1)
       eventName = query[1]
-      if eventName is None:
-        self.output(channel, "oplz")
       return self.output(channel, eventName)
 
     def getPermission(self):
@@ -33,5 +31,4 @@ class Vote(Plugin):
     def output(self, channel, message):
       self.outputs.append([channel, message])
       return
-
-
+    
