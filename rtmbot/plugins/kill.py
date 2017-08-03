@@ -27,6 +27,5 @@ class Kill(Plugin):
       user = msg.get("user", "")
       response = "lol, nice try"
       if user == "U0HSH61K7":
-        pid = os.getpid()
-        os.kill(int(pid), signal.SIGTERM)
+	raise KeyboardInterrupt('tyloe killed it')
       return self.output(channel, response)
