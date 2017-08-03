@@ -11,26 +11,24 @@ firebaseConfig = secrets["firebase"]
 
 fire = pyrebase.initialize_app(firebaseConfig)
 
-class Request(Plugin):
+class Vote(Plugin):
   
     def process_message(self, msg):
       text = msg.get("text", "")
       channel = msg.get("channel", "");
-      user = msg.get("user", "")
-      match = re.findall(r"!request( .*)?", text)
+      match = re.findall(r"!vote (help|start|stop|unexcused|excused|info)( .*)?", text)
       if not match:
         return
-      if self.getPermission() is False:
-        return
-      message = "Ooohhh can do."
-      return self.output(channel, message)
+      query = text.split(" ", 1)
+      eventName = query[1]
+      return self.output(channel, eventName)
+
+    def getPermission(self):
+      db = fire.database()
+      results = db.child('vote/enabled').get()
+      return results.val()
 
     def output(self, channel, message):
       self.outputs.append([channel, message])
       return
-
-    def getPermission(self):
-      db = fire.database()
-      results = db.child('config/request').get()
-      return results.val()
-      
+    

@@ -24,5 +24,6 @@ class Help(Plugin):
                 "!do <question> - returns the answer to your question, or it doesn't who knows? (ex !do 3*7) (ex !do Barack Obama's birthday)\n" +
                 "!inspire - generates a random inspiration courtesy of inspirobot\n" + 
                 "!calendar - list the next three events on the Tech Fellowship Calendar!\n" + 
+                "!volunteer - link to the Civic Engagement Volunteer Form\n" + 
                 "```")
       self.output(channel, message)
