@@ -1,2 +1,2 @@
 #!/bin/bash
-/Users/tylorgarrett/Workspace/glados2/bot/bin/python run.py 
+/home/tylor/Workspace/mr_meeseeks/bot/bin/python run.py 
