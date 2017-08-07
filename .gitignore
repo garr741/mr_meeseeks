@@ -5,6 +5,7 @@
 secrets.py
 .github/
 .vscode/
+serviceCredentials.json
 
 ### macOS ###
 *.DS_Store
