@@ -21,7 +21,6 @@ class AutoDelete(Plugin):
       thread_ts = msg.get("thread_ts", None)
       subtype = msg.get("subtype", None)
       if self.getChannel() == channel and self.getPermission() and thread_ts is None and subtype is None:
-        print(msg)
         self.deleteMessage(channel, ts)
       return
 
@@ -30,8 +29,8 @@ class AutoDelete(Plugin):
       return
 
     def deleteMessage(self, channel, ts):
-      print(channel)
-      print(ts)
+      data = {"channel": channel, 'ts': ts}
+      results = requests.post('https://us-central1-glados-59d2e.cloudfunctions.net/deleteMessage', data=data)
 
     def getChannel(self):
       db = fire.database()
