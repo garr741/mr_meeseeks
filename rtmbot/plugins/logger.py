@@ -18,12 +18,14 @@ class Logger(Plugin):
     def process_presence_change(self, data):
       db = fire.database()
       presence = data.get("presence", "")
+      user = data.get("user", "")
       if presence == "active" and self.getPermission() is True:
         utc_now = pytz.utc.localize(datetime.datetime.utcnow())
         d = utc_now.astimezone(pytz.timezone("America/Indianapolis"))
         obj = {
           'day': d.isoweekday(),
-          'hour': d.hour
+          'hour': d.hour,
+	  'user': user
         }
         db.child("data/presence").push(obj)
   
