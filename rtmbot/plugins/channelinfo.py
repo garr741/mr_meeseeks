@@ -12,7 +12,7 @@ class ChannelInfo(Plugin):
     def process_message(self, msg):
       text = msg.get("text", "")
       channel = msg.get("channel", "");
-      match = re.findall(r"!channel( .*)?", text)
+      match = re.findall(r"!channelinfo( .*)?", text)
       if not match:
         return
       message = self.getChannelInfo(channel)
