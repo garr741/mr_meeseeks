@@ -25,7 +25,7 @@ class Logger(Plugin):
         obj = {
           'day': d.isoweekday(),
           'hour': d.hour,
-	  'user': user
+	        'user': user
         }
         db.child("data/presence").push(obj)
   
